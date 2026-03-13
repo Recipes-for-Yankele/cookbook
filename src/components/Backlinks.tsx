@@ -21,26 +21,41 @@ export function Backlinks({ slug, nav }: Props) {
 
   return (
     <Box>
-      <Text fontSize="sm" fontWeight="600" mb="2">
+      <Text
+        fontSize="xs"
+        fontWeight="600"
+        textTransform="uppercase"
+        letterSpacing="0.08em"
+        color="fg.subtle"
+        mb="2.5"
+      >
         Backlinks
       </Text>
-      <Box as="ul" listStyleType="none" p="0" m="0" display="flex" flexDirection="column" gap="0.5">
+      <Box display="flex" flexWrap="wrap" gap="1.5">
         {backlinkFiles.map((f) => (
-          <Box as="li" key={f.slug}>
-            <Link to="/$" params={{ _splat: f.slug }}>
-              <Text
-                as="span"
-                fontSize="sm"
-                color="colorPalette.fg"
-                fontWeight="500"
-                _hover={{ textDecoration: 'underline' }}
-                display="block"
-                truncate
-              >
-                {f.name}
-              </Text>
-            </Link>
-          </Box>
+          <Link key={f.slug} to="/$" params={{ _splat: f.slug }}>
+            <Box
+              as="span"
+              display="inline-flex"
+              alignItems="center"
+              fontSize="xs"
+              fontWeight="500"
+              px="2.5"
+              py="1"
+              borderRadius="md"
+              bg="bg.emphasized"
+              color="fg.muted"
+              cursor="pointer"
+              transition="all 0.15s ease"
+              _hover={{
+                bg: 'bg.muted',
+                color: 'fg',
+              }}
+            >
+              <Box as="span" color="fg.subtle" mr="0.5">#</Box>
+              {f.slug}
+            </Box>
+          </Link>
         ))}
       </Box>
     </Box>

@@ -1,7 +1,7 @@
 import parse, { type HTMLReactParserOptions, Element, domToReact } from 'html-react-parser'
 import type { DOMNode } from 'html-react-parser'
 import { Link } from '@tanstack/react-router'
-import { Box } from '@chakra-ui/react'
+import { Badge, Box } from '@chakra-ui/react'
 
 type MarkdownProps = {
   html: string
@@ -22,19 +22,20 @@ export function Markdown({ html }: MarkdownProps) {
       if (domNode.attribs['data-wikilink']) {
         const slug = domNode.attribs['data-wikilink']
         return (
-          <Link
-            to="/$"
-            params={{ _splat: slug }}
-            style={{
-              backgroundColor: 'color-mix(in srgb, var(--chakra-colors-accent-emphasized) 15%, transparent)',
-              padding: '0 0.15em',
-              borderRadius: '3px',
-              fontWeight: 500,
-              textDecoration: 'none',
-              transition: 'background 0.15s ease',
-            }}
-          >
-            {domToReact(domNode.children as DOMNode[], options)}
+          <Link to="/$" params={{ _splat: slug }}>
+            <Badge
+              variant="subtle"
+              size="sm"
+              colorPalette="teal"
+              cursor="pointer"
+              fontWeight="500"
+              verticalAlign="middle"
+              transition="all 0.15s ease"
+              _hover={{ bg: 'teal.muted' }}
+            >
+              <Box as="span" opacity={0.6}>#</Box>
+              {domToReact(domNode.children as DOMNode[], options)}
+            </Badge>
           </Link>
         )
       }

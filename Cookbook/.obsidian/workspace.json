@@ -13,13 +13,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Techniques/Pressing and Grating Tofu.md",
+                "file": "Recipes/Index.md",
                 "mode": "source",
-                "source": false,
+                "source": true,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "Pressing and Grating Tofu"
+              "title": "Index"
             }
           }
         ]
@@ -95,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Techniques/Pressing and Grating Tofu.md",
+                "file": "Recipes/Index.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -105,7 +105,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Pressing and Grating Tofu"
+              "title": "Backlinks for Index"
             }
           },
           {
@@ -114,12 +114,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Techniques/Pressing and Grating Tofu.md",
+                "file": "Recipes/Index.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from Pressing and Grating Tofu"
+              "title": "Outgoing links from Index"
             }
           },
           {
@@ -182,10 +182,10 @@
             "state": {
               "type": "file-properties",
               "state": {
-                "file": "Techniques/Pressing and Grating Tofu.md"
+                "file": "Recipes/Index.md"
               },
               "icon": "lucide-info",
-              "title": "File properties for Pressing and Grating Tofu"
+              "title": "File properties for Index"
             }
           }
         ],
@@ -209,11 +209,11 @@
   },
   "active": "7a20e4fa5a2d12ae",
   "lastOpenFiles": [
-    "Techniques/Soft-Boiling Eggs.md",
     "Techniques/Index.md",
+    "Techniques/Pressing and Grating Tofu.md",
+    "Techniques/Soft-Boiling Eggs.md",
     "Recipes/Index.md",
     "Techniques/Garlic and Ginger Paste Base.md",
-    "Techniques/Pressing and Grating Tofu.md",
     "Techniques/Blooming Spices.md",
     "Untitled 1.base",
     "Untitled.base",
