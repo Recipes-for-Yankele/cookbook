@@ -21,23 +21,8 @@ function RootLayout() {
         <MobileDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} />
 
         <Flex flex="1" align="flex-start">
-          {/* Left sidebar — desktop only */}
-          <Box
-            display={{ base: 'none', md: 'block' }}
-            w="300px"
-            flexShrink={0}
-            position="sticky"
-            top={0}
-            h="100vh"
-            alignSelf="flex-start"
-            borderRightWidth="1px"
-            borderColor="border.muted"
-          >
-            <Sidebar />
-          </Box>
-
-          {/* Main content */}
           <Box flex="1" minW={0} display="flex" justifyContent="center">
+            <Sidebar />
             <Box w="100%" maxW="900px" py={{ base: '6', md: '12' }} px={{ base: '4', md: '10' }}>
               <Outlet />
             </Box>

@@ -234,7 +234,7 @@ function NavTree({
 
     return baseCollection.filter((node) => {
       const matchesText = !textQuery || contains(node.name, textQuery)
-      const matchesTags = activeTags.length === 0 || (node.tags ? activeTags.every((t) => node.tags!.includes(t)) : false)
+      const matchesTags = activeTags.length === 0 || (node.tags ? activeTags.every((t: any) => node.tags!.includes(t)) : false)
       return matchesText && matchesTags
     })
   }, [baseCollection, textQuery, activeTags, isFiltering, contains])
@@ -246,7 +246,7 @@ function NavTree({
   return (
     <>
       <SearchBar allTags={allTags} />
-      <Box mt={4}>
+      <Box mt={1}>
         <TreeView.Root
           collection={collection}
           animateContent
