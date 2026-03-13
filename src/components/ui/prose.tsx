@@ -240,6 +240,7 @@ export const Prose = chakra('div', {
   },
   variants: {
     size: {
+      sm: { fontSize: 'sm' },
       md: { fontSize: 'md' },
       lg: { fontSize: 'lg' },
     },

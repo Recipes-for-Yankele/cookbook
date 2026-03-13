@@ -1,7 +1,8 @@
 import { createFileRoute, notFound, Link } from '@tanstack/react-router'
 import { Box, Flex, Text, Separator } from '@chakra-ui/react'
+import { useFontSize } from '#/utils'
 import { BreadcrumbRoot, BreadcrumbLink, BreadcrumbCurrentLink } from '#/components/ui/breadcrumb'
-import { getCookbookFileBySlug, cookbookNav } from '#/utils/cookbook-api'
+import { getCookbookFileBySlug } from '#/utils'
 import { Markdown } from '#/components/Markdown'
 import { TableOfContents } from '#/components/TableOfContents'
 import { Backlinks } from '#/components/Backlinks'
@@ -43,17 +44,24 @@ function SlugBreadcrumb({ slug }: { slug: string }) {
 function RightSidebar({ slug, headings }: { slug: string; headings: NonNullable<ReturnType<typeof getCookbookFileBySlug>>['headings'] }) {
   return (
     <Flex direction="column" gap="5">
-      <Graph slug={slug} nav={cookbookNav} />
+      <Graph slug={slug} />
       <Separator />
       <TableOfContents headings={headings} />
       <Separator />
-      <Backlinks slug={slug} nav={cookbookNav} />
+      <Backlinks slug={slug} />
     </Flex>
   )
 }
 
+const H1_SIZE: Record<string, object> = {
+  sm: { base: 'xl', md: '2xl' },
+  md: { base: '2xl', md: '3xl' },
+  lg: { base: '3xl', md: '4xl' },
+}
+
 function FilePage() {
   const { fileContent, slug } = Route.useLoaderData()
+  const { size } = useFontSize()
 
   return (
     <Flex gap="16" align="flex-start" direction={{ base: 'column', lg: 'row' }}>
@@ -63,7 +71,7 @@ function FilePage() {
           <SlugBreadcrumb slug={slug} />
           <Text
             as="h1"
-            fontSize={{ base: '2xl', md: '3xl' }}
+            fontSize={H1_SIZE[size]}
             fontWeight="700"
             letterSpacing="-0.03em"
             lineHeight="1.15"

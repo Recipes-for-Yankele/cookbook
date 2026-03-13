@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Box, Text, TreeView, createTreeCollection } from '@chakra-ui/react'
-import type { MarkdownHeading } from '#/utils/markdown'
+import type { MarkdownHeading } from '#/utils'
+import { useFontSize, UI_FONT_SIZE, LABEL_FONT_SIZE } from '#/utils'
 
 type Props = {
   headings: MarkdownHeading[]
@@ -35,6 +36,9 @@ function buildTree(headings: MarkdownHeading[]): HeadingNode[] {
 }
 
 export function TableOfContents({ headings }: Props) {
+  const { size } = useFontSize()
+  const uiSize = UI_FONT_SIZE[size]
+  const labelSize = LABEL_FONT_SIZE[size]
   const [activeId, setActiveId] = useState<string>('')
   const observerRef = useRef<IntersectionObserver | null>(null)
 
@@ -78,7 +82,7 @@ export function TableOfContents({ headings }: Props) {
 
   return (
     <Box>
-      <Text fontSize="sm" fontWeight="600" mb="1">
+      <Text fontSize={labelSize} fontWeight="600" mb="1" transition="font-size 0.15s ease">
         On this page
       </Text>
       <TreeView.Root
@@ -95,10 +99,11 @@ export function TableOfContents({ headings }: Props) {
                 <TreeView.BranchControl>
                   <TreeView.BranchText
                     asChild
+                    fontSize={uiSize}
                     fontWeight={activeId === node.id ? '600' : '400'}
                     color={activeId === node.id ? 'fg' : 'fg.muted'}
                     _hover={{ color: 'fg' }}
-                    transition="color 0.15s"
+                    transition="color 0.15s, font-size 0.15s ease"
                   >
                     <a href={`#${node.id}`}>{node.text}</a>
                   </TreeView.BranchText>
@@ -107,10 +112,11 @@ export function TableOfContents({ headings }: Props) {
                 <TreeView.Item asChild value={node.id}>
                   <a href={`#${node.id}`}>
                     <TreeView.ItemText
+                      fontSize={uiSize}
                       fontWeight={activeId === node.id ? '500' : '400'}
                       color={activeId === node.id ? 'fg' : 'fg.muted'}
                       _hover={{ color: 'fg' }}
-                      transition="color 0.15s"
+                      transition="color 0.15s, font-size 0.15s ease"
                     >
                       {node.text}
                     </TreeView.ItemText>

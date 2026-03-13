@@ -26,11 +26,27 @@ import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeKatex from 'rehype-katex'
 import rehypeStringify from 'rehype-stringify'
+import { parse as parseYaml } from 'yaml'
 import { visit } from 'unist-util-visit'
 import { toString } from 'hast-util-to-string'
 import type { Element } from 'hast'
 import type { Root, Text, Parent } from 'mdast'
 import type { Plugin } from 'unified'
+
+// ── Frontmatter helpers ────────────────────────────────────────────────────────
+
+function extractFrontmatterTags(content: string): string[] {
+  const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---/)
+  if (!match) return []
+  try {
+    const fm = parseYaml(match[1])
+    if (Array.isArray(fm?.tags)) return fm.tags.map(String)
+    if (typeof fm?.tags === 'string') return [fm.tags]
+  } catch {
+    // ignore malformed frontmatter
+  }
+  return []
+}
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -228,13 +244,24 @@ const cookbook = defineCollection({
   schema: z.object({
     content: z.string(),
   }),
-  transform: async (doc, { cache, collection }) => {
+  transform: async (doc, { cache, collection }): Promise<{
+    slug: string
+    section: string
+    isIndex: boolean
+    name: string
+    tags: string[]
+    rawLinks: string[]
+    resolvedLinks: string[]
+    html: string
+    headings: MarkdownHeading[]
+  }> => {
     const filePath = doc._meta.filePath
     const slug = deriveSlug(filePath)
     const section = deriveSectionName(filePath)
     const isIndex = doc._meta.fileName.toLowerCase() === 'index.md'
     const name = isIndex ? section : doc._meta.fileName.replace(/\.md$/, '')
     const rawLinks = extractWikilinks(doc.content)
+    const tags = extractFrontmatterTags(doc.content)
 
     // Build slug stubs once across all transforms
     if (!slugStubsCache) {
@@ -321,6 +348,7 @@ const cookbook = defineCollection({
       section,
       isIndex,
       name,
+      tags,
       rawLinks,
       resolvedLinks,
       html,

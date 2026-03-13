@@ -1,14 +1,18 @@
 import { Link } from '@tanstack/react-router'
 import { Box, Text } from '@chakra-ui/react'
-import type { CookbookNav } from '#/utils/cookbook-api'
+import { useBacklinks, useNav, useFontSize, UI_FONT_SIZE, LABEL_FONT_SIZE } from '#/utils'
 
 type Props = {
   slug: string
-  nav: CookbookNav
 }
 
-export function Backlinks({ slug, nav }: Props) {
-  const backlinkSlugs = nav.backlinks[slug] ?? []
+export function Backlinks({ slug }: Props) {
+  const { size } = useFontSize()
+  const uiSize = UI_FONT_SIZE[size]
+  const labelSize = LABEL_FONT_SIZE[size]
+  const backlinkSlugs = useBacklinks(slug)
+  const nav = useNav()
+
   if (!backlinkSlugs.length) return null
 
   const allFiles = nav.sections.flatMap((s) => [
@@ -22,12 +26,13 @@ export function Backlinks({ slug, nav }: Props) {
   return (
     <Box>
       <Text
-        fontSize="xs"
+        fontSize={labelSize}
         fontWeight="600"
         textTransform="uppercase"
         letterSpacing="0.08em"
         color="fg.subtle"
         mb="2.5"
+        transition="font-size 0.15s ease"
       >
         Backlinks
       </Text>
@@ -38,7 +43,7 @@ export function Backlinks({ slug, nav }: Props) {
               as="span"
               display="inline-flex"
               alignItems="center"
-              fontSize="xs"
+              fontSize={uiSize}
               fontWeight="500"
               px="2.5"
               py="1"
@@ -47,10 +52,7 @@ export function Backlinks({ slug, nav }: Props) {
               color="fg.muted"
               cursor="pointer"
               transition="all 0.15s ease"
-              _hover={{
-                bg: 'bg.muted',
-                color: 'fg',
-              }}
+              _hover={{ bg: 'bg.muted', color: 'fg' }}
             >
               <Box as="span" color="fg.subtle" mr="0.5">#</Box>
               {f.slug}

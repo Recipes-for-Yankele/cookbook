@@ -2,11 +2,10 @@ import { useEffect, useRef } from 'react'
 import * as d3 from 'd3'
 import { useNavigate } from '@tanstack/react-router'
 import { Box, Text } from '@chakra-ui/react'
-import type { CookbookNav } from '#/utils/cookbook-api'
+import { useNav } from '#/utils'
 
 type Props = {
   slug: string
-  nav: CookbookNav
 }
 
 type NodeDatum = d3.SimulationNodeDatum & {
@@ -21,7 +20,8 @@ type LinkDatum = d3.SimulationLinkDatum<NodeDatum> & {
   target: NodeDatum | string
 }
 
-export function Graph({ slug, nav }: Props) {
+export function Graph({ slug }: Props) {
+  const nav = useNav()
   const containerRef = useRef<HTMLDivElement>(null)
   const navigate = useNavigate()
 

@@ -3,12 +3,14 @@ import type { DOMNode } from 'html-react-parser'
 import { Link } from '@tanstack/react-router'
 import { Badge, Link as ChakraLink, Box, Checkbox } from '@chakra-ui/react'
 import { Prose } from '#/components/ui/prose'
+import { useFontSize } from '#/utils'
 
 type MarkdownProps = {
   html: string
 }
 
 export function Markdown({ html }: MarkdownProps) {
+  const { size } = useFontSize()
   let firstH1Skipped = false
 
   const options: HTMLReactParserOptions = {
@@ -97,7 +99,7 @@ export function Markdown({ html }: MarkdownProps) {
   }
 
   return (
-    <Prose maxWidth="none">
+    <Prose maxWidth="none" size={size}>
       {parse(html, options)}
     </Prose>
   )

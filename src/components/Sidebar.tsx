@@ -12,7 +12,10 @@ import {
   IconButton,
 } from '@chakra-ui/react'
 import { ColorModeButton } from '#/components/ui/color-mode'
-import { cookbookNav } from '#/utils/cookbook-api'
+import { Tooltip } from '#/components/ui/tooltip'
+import { FontSizeToggle } from '#/components/FontSizeToggle'
+import { useFontSize, UI_FONT_SIZE, useNav } from '#/utils'
+import type { CookbookSection } from '#/utils'
 import { LuGithub, LuSearch, LuX, LuChevronRight, LuFileText } from 'react-icons/lu'
 
 // ── Types ───────────────────────────────────────────────────────────────────
@@ -21,12 +24,13 @@ interface NavNode {
   id: string
   name: string
   slug?: string | null
+  tags?: string[]
   children?: NavNode[]
 }
 
-// ── Build tree collection from cookbookNav ──────────────────────────────────
+// ── Build tree collection from nav sections ──────────────────────────────────
 
-function buildCollection(sections: typeof cookbookNav.sections) {
+function buildCollection(sections: CookbookSection[]) {
   const children: NavNode[] = sections.map((section) => {
     if (section.files.length === 0) {
       return { id: section.slug, name: section.name, slug: section.indexSlug ?? section.slug }
@@ -35,7 +39,7 @@ function buildCollection(sections: typeof cookbookNav.sections) {
       id: section.slug,
       name: section.name,
       slug: section.indexSlug,
-      children: section.files.map((f) => ({ id: f.slug, name: f.name, slug: f.slug })),
+      children: section.files.map((f) => ({ id: f.slug, name: f.name, slug: f.slug, tags: f.tags })),
     }
   })
 
@@ -45,8 +49,6 @@ function buildCollection(sections: typeof cookbookNav.sections) {
     rootNode: { id: 'ROOT', name: '', children },
   })
 }
-
-const initialCollection = buildCollection(cookbookNav.sections)
 
 // ── Search box ─────────────────────────────────────────────────────────────
 
@@ -112,6 +114,157 @@ function SearchBox({
 
 const leafIcon = <LuFileText size={12} style={{ flexShrink: 0, opacity: 0.4 }} />
 
+// ── Truncation-aware tooltip ─────────────────────────────────────────────────
+
+function useTruncated() {
+  const ref = useRef<HTMLElement | null>(null)
+  const [truncated, setTruncated] = useState(false)
+  const check = () => {
+    if (ref.current) setTruncated(ref.current.scrollWidth > ref.current.clientWidth)
+  }
+  return { ref, truncated, check }
+}
+
+// ── Branch item ──────────────────────────────────────────────────────────────
+
+function BranchItem({ node, nodeState, query, uiSize, onNavigate }: {
+  node: NavNode
+  nodeState: { expanded: boolean }
+  query: string
+  uiSize: string
+  onNavigate?: () => void
+}) {
+  const { ref, truncated, check } = useTruncated()
+
+  return (
+    <Tooltip
+      content={node.name}
+      disabled={!truncated}
+      positioning={{ placement: 'right' }}
+      openDelay={300}
+      showArrow
+    >
+      <TreeView.BranchControl
+        cursor="pointer"
+        _hover={{ bg: 'bg.subtle' }}
+        borderRadius="md"
+        px="2"
+        py="1"
+        onMouseEnter={check}
+      >
+        <LuChevronRight
+          size={13}
+          style={{
+            flexShrink: 0,
+            opacity: 0.5,
+            transform: nodeState.expanded ? 'rotate(90deg)' : 'rotate(0deg)',
+            transition: 'transform 0.15s',
+          }}
+        />
+        <TreeView.BranchText
+          ref={ref as React.Ref<HTMLElement>}
+          fontSize={uiSize}
+          fontWeight="500"
+          truncate
+          transition="font-size 0.15s ease"
+        >
+          {node.slug ? (
+            <Link
+              to="/$"
+              params={{ _splat: node.slug }}
+              onClick={(e) => { e.stopPropagation(); onNavigate?.() }}
+              style={{ flex: 1, minWidth: 0 }}
+            >
+              <Highlight ignoreCase query={[query]} styles={{ bg: 'yellow.muted', color: 'yellow.fg', px: '0.5', borderRadius: 'sm', fontWeight: '600' }}>
+                {node.name}
+              </Highlight>
+            </Link>
+          ) : (
+            <Highlight ignoreCase query={[query]} styles={{ bg: 'yellow.muted', color: 'yellow.fg', px: '0.5', borderRadius: 'sm', fontWeight: '600' }}>
+              {node.name}
+            </Highlight>
+          )}
+        </TreeView.BranchText>
+      </TreeView.BranchControl>
+    </Tooltip>
+  )
+}
+
+// ── Leaf item ────────────────────────────────────────────────────────────────
+
+function LeafItem({ node, currentSlug, query, uiSize, onNavigate }: {
+  node: NavNode
+  currentSlug: string
+  query: string
+  uiSize: string
+  onNavigate?: () => void
+}) {
+  const { ref, truncated, check } = useTruncated()
+  const tags = node.tags?.filter(t => t !== 'recipe') ?? []
+  const isActive = currentSlug === node.slug
+
+  const tooltipContent = (truncated || tags.length > 0) ? (
+    <Flex direction="column" gap="1.5" maxW="200px">
+      {truncated && (
+        <Box fontSize="xs" fontWeight="500">{node.name}</Box>
+      )}
+      {tags.length > 0 && (
+        <Flex gap="1" flexWrap="wrap">
+          {tags.map(tag => (
+            <Box
+              key={tag}
+              as="span"
+              px="1.5"
+              py="0.5"
+              borderRadius="sm"
+              fontSize="2xs"
+              fontWeight="500"
+              bg="whiteAlpha.200"
+              letterSpacing="0.02em"
+              textTransform="capitalize"
+            >
+              {tag}
+            </Box>
+          ))}
+        </Flex>
+      )}
+    </Flex>
+  ) : undefined
+
+  return (
+    <Tooltip
+      content={tooltipContent}
+      disabled={!tooltipContent}
+      positioning={{ placement: 'right' }}
+      openDelay={300}
+      showArrow
+    >
+      <TreeView.Item asChild>
+        <Link
+          to="/$"
+          params={{ _splat: node.slug ?? node.id }}
+          onClick={() => onNavigate?.()}
+          onMouseEnter={check}
+        >
+          {leafIcon}
+          <TreeView.ItemText
+            ref={ref as React.Ref<HTMLElement>}
+            fontSize={uiSize}
+            fontWeight={isActive ? '500' : '400'}
+            color={isActive ? 'fg' : 'fg.muted'}
+            truncate
+            transition="font-size 0.15s ease"
+          >
+            <Highlight ignoreCase query={[query]} styles={{ bg: 'yellow.muted', color: 'yellow.fg', px: '0.5', borderRadius: 'sm', fontWeight: '600' }}>
+              {node.name}
+            </Highlight>
+          </TreeView.ItemText>
+        </Link>
+      </TreeView.Item>
+    </Tooltip>
+  )
+}
+
 // ── Nav tree ────────────────────────────────────────────────────────────────
 
 function NavTree({
@@ -121,27 +274,32 @@ function NavTree({
   currentSlug: string
   onNavigate?: () => void
 }) {
+  const { size } = useFontSize()
+  const uiSize = UI_FONT_SIZE[size]
   const { contains } = useFilter({ sensitivity: 'base' })
+  const { sections } = useNav()
+
+  const baseCollection = useMemo(() => buildCollection(sections), [sections])
 
   const defaultExpanded = useMemo(() =>
-    initialCollection.rootNode.children
+    baseCollection.rootNode.children
       ?.filter((s) => s.children?.some((f) => f.slug === currentSlug) || s.slug === currentSlug)
       .map((s) => s.id) ?? [],
-    [currentSlug],
+    [baseCollection, currentSlug],
   )
 
-  const [collection, setCollection] = useState(initialCollection)
+  const [collection, setCollection] = useState(baseCollection)
   const [expanded, setExpanded] = useState<string[]>(defaultExpanded)
   const [query, setQuery] = useState('')
 
   const search = (value: string) => {
     setQuery(value)
     if (!value) {
-      setCollection(initialCollection)
+      setCollection(baseCollection)
       setExpanded(defaultExpanded)
       return
     }
-    const next = initialCollection.filter((node) => contains(node.name, value))
+    const next = baseCollection.filter((node) => contains(node.name, value))
     setCollection(next)
     setExpanded(next.getBranchValues())
   }
@@ -161,71 +319,9 @@ function NavTree({
             <TreeView.Node<NavNode>
               render={({ node, nodeState }) => {
                 if (nodeState.isBranch) {
-                  return (
-                    <TreeView.BranchControl
-                      cursor="pointer"
-                      _hover={{ bg: 'bg.subtle' }}
-                      borderRadius="md"
-                      px="2"
-                      py="1"
-                    >
-                      <LuChevronRight
-                        size={13}
-                        style={{
-                          flexShrink: 0,
-                          opacity: 0.5,
-                          transform: nodeState.expanded ? 'rotate(90deg)' : 'rotate(0deg)',
-                          transition: 'transform 0.15s',
-                        }}
-                      />
-                      <TreeView.BranchText
-                        fontSize="sm"
-                        fontWeight="500"
-                        truncate
-                      >
-                        {node.slug ? (
-                          <Link
-                            to="/$"
-                            params={{ _splat: node.slug }}
-                            onClick={(e) => { e.stopPropagation(); onNavigate?.() }}
-                            style={{ flex: 1, minWidth: 0 }}
-                          >
-                            <Highlight ignoreCase query={[query]} styles={{ bg: 'yellow.muted', color: 'yellow.fg', px: '0.5', borderRadius: 'sm', fontWeight: '600' }}>
-                              {node.name}
-                            </Highlight>
-                          </Link>
-                        ) : (
-                          <Highlight ignoreCase query={[query]} styles={{ bg: 'yellow.muted', color: 'yellow.fg', px: '0.5', borderRadius: 'sm', fontWeight: '600' }}>
-                            {node.name}
-                          </Highlight>
-                        )}
-                      </TreeView.BranchText>
-                    </TreeView.BranchControl>
-                  )
+                  return <BranchItem node={node} nodeState={nodeState} query={query} uiSize={uiSize} onNavigate={onNavigate} />
                 }
-
-                const isActive = currentSlug === node.slug
-                return (
-                  <TreeView.Item asChild>
-                    <Link
-                      to="/$"
-                      params={{ _splat: node.slug ?? node.id }}
-                      onClick={() => onNavigate?.()}
-                    >
-                      {leafIcon}
-                      <TreeView.ItemText
-                        fontSize="sm"
-                        fontWeight={isActive ? '500' : '400'}
-                        color={isActive ? 'fg' : 'fg.muted'}
-                        truncate
-                      >
-                        <Highlight ignoreCase query={[query]} styles={{ bg: 'yellow.muted', color: 'yellow.fg', px: '0.5', borderRadius: 'sm', fontWeight: '600' }}>
-                          {node.name}
-                        </Highlight>
-                      </TreeView.ItemText>
-                    </Link>
-                  </TreeView.Item>
-                )
+                return <LeafItem node={node} currentSlug={currentSlug} query={query} uiSize={uiSize} onNavigate={onNavigate} />
               }}
             />
           </TreeView.Tree>
@@ -284,6 +380,7 @@ export function Sidebar() {
             </IconButton>
           </ChakraLink>
           <ColorModeButton size="xs" variant="ghost" />
+          <FontSizeToggle size="xs" />
         </Flex>
       </Flex>
 
