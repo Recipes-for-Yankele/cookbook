@@ -38,9 +38,8 @@ export function MobileDrawer({ open, onClose }: { open: boolean; onClose: () => 
         <Flex px="4" pt="5" pb="3" align="center" justify="space-between" flexShrink={0}>
           <Link to="/" onClick={onClose}>
             <Box fontWeight="700" fontSize="md" letterSpacing="-0.02em" lineHeight="1.2">
-              מַטְבָּח יַנְקֶלֶע
+              Yankele's Cookbook
             </Box>
-            <Box fontSize="xs" color="fg.muted" mt="0.5">Yankele's Kitchen</Box>
           </Link>
           <button
             onClick={onClose}

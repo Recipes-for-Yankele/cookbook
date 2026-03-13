@@ -27,7 +27,7 @@ export function MobileTopBar({ onOpen }: { onOpen: () => void }) {
         <LuMenu size={20} />
       </button>
       <Link to="/">
-        <Box fontSize="sm" fontWeight="700" letterSpacing="-0.02em">מַטְבָּח יַנְקֶלֶע</Box>
+        <Box fontSize="sm" fontWeight="700" letterSpacing="-0.02em">Yankele's Cookbook</Box>
       </Link>
       <Flex align="center" gap="0.5">
         <FontSizeToggle size="sm" />

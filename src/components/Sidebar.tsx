@@ -364,9 +364,8 @@ export function Sidebar() {
       <Flex px="4" pt="6" pb="3" flexShrink={0} align="flex-start" justify="space-between" gap="2">
         <Link to="/">
           <Text fontWeight="700" fontSize="lg" letterSpacing="-0.02em" lineHeight="1.2">
-            מַטְבָּח יַנְקֶלֶע
+            Yankele's Cookbook
           </Text>
-          <Text fontSize="xs" color="fg.muted" mt="0.5">Yankele's Kitchen</Text>
         </Link>
 
         <Flex align="center" gap="0.5" flexShrink={0} mt="0.5">

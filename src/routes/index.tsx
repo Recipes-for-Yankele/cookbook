@@ -9,7 +9,6 @@ export const Route = createFileRoute('/')({
 })
 
 const HEADING_SIZE: Record<string, string> = { sm: '3xl', md: '4xl', lg: '5xl' }
-const SUBTEXT_SIZE: Record<string, string> = { sm: 'sm', md: 'md', lg: 'lg' }
 
 function IndexPage() {
   const { size } = useFontSize()
@@ -33,16 +32,8 @@ function IndexPage() {
         fontWeight="500"
         transition="font-size 0.15s ease"
       >
-        מַטְבָּח יַנְקֶלֶע
+        Yankele's Cookbook
       </Heading>
-      <Text
-        fontSize={SUBTEXT_SIZE[size]}
-        fontStyle="italic"
-        color="fg.muted"
-        transition="font-size 0.15s ease"
-      >
-        Yankele's Kitchen
-      </Text>
       <Text color="fg.muted" fontSize={size} maxW="sm" transition="font-size 0.15s ease">
         A personal collection of recipes and techniques. Pick something from the sidebar.
       </Text>
