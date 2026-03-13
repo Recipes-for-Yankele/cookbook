@@ -11,14 +11,15 @@
             "id": "7a20e4fa5a2d12ae",
             "type": "leaf",
             "state": {
-              "type": "split-diff-view",
+              "type": "markdown",
               "state": {
-                "aFile": "Cookbook/.obsidian/workspace.json",
-                "bFile": "Cookbook/.obsidian/workspace.json",
-                "aRef": ""
+                "file": "Techniques/Pressing and Grating Tofu.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
               },
-              "icon": "diff",
-              "title": "Diff: workspace.json  (Working Tree)"
+              "icon": "lucide-file",
+              "title": "Pressing and Grating Tofu"
             }
           }
         ]
@@ -94,6 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Techniques/Pressing and Grating Tofu.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +105,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks"
+              "title": "Backlinks for Pressing and Grating Tofu"
             }
           },
           {
@@ -112,11 +114,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Techniques/Pressing and Grating Tofu.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links"
+              "title": "Outgoing links from Pressing and Grating Tofu"
             }
           },
           {
@@ -178,9 +181,11 @@
             "type": "leaf",
             "state": {
               "type": "file-properties",
-              "state": {},
+              "state": {
+                "file": "Techniques/Pressing and Grating Tofu.md"
+              },
               "icon": "lucide-info",
-              "title": "File properties"
+              "title": "File properties for Pressing and Grating Tofu"
             }
           }
         ],
@@ -202,8 +207,9 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "9068590ba2095ddc",
+  "active": "7a20e4fa5a2d12ae",
   "lastOpenFiles": [
+    "Techniques/Soft-Boiling Eggs.md",
     "Techniques/Index.md",
     "Recipes/Index.md",
     "Techniques/Garlic and Ginger Paste Base.md",
@@ -216,7 +222,6 @@
     "Honorable Mentions and Ideas.md",
     "Chefs.md",
     "Recipes/Baked Tofu and Crispy Rice Salad.md",
-    "Techniques/Soft-Boiling Eggs.md",
     "Recipes/Quick Edamame and Dumplings.md",
     "Recipes/Overnight Oats Formula.md",
     "Recipes/Miso Soup Freezer Balls.md",
