@@ -46,7 +46,6 @@ chef: "[[Chefs|Janis]]"
 
 ---
 
-
 ## Method
 
 1. Chop onion. Blend tomato into a juice and set aside.

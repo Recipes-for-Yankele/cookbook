@@ -11,12 +11,14 @@
             "id": "7a20e4fa5a2d12ae",
             "type": "leaf",
             "state": {
-              "type": "image",
+              "type": "split-diff-view",
               "state": {
-                "file": "unknown.jpg"
+                "aFile": "Cookbook/Recipes/Feta Butter Beans.md",
+                "bFile": "Cookbook/Recipes/Feta Butter Beans.md",
+                "aRef": ""
               },
-              "icon": "lucide-image",
-              "title": "unknown"
+              "icon": "diff",
+              "title": "Diff: Feta Butter Beans  (Working Tree)"
             }
           }
         ]
@@ -92,7 +94,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "unknown.jpg",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +103,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for unknown"
+              "title": "Backlinks"
             }
           },
           {
@@ -111,12 +112,11 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "unknown.jpg",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from unknown"
+              "title": "Outgoing links"
             }
           },
           {
@@ -178,11 +178,9 @@
             "type": "leaf",
             "state": {
               "type": "file-properties",
-              "state": {
-                "file": "unknown.jpg"
-              },
+              "state": {},
               "icon": "lucide-info",
-              "title": "File properties for unknown"
+              "title": "File properties"
             }
           }
         ],
@@ -206,12 +204,13 @@
   },
   "active": "7a20e4fa5a2d12ae",
   "lastOpenFiles": [
+    "unknown.jpg",
     "Recipes/Feta Butter Beans.md",
-    "Recipes/Mayak Eggs.md",
     "Recipes/Overnight Oats Formula.md",
+    "Recipes/Miso Soup Freezer Balls.md",
+    "Recipes/Mayak Eggs.md",
     "Techniques/Batch Freezer Prep.md",
     "Techniques/Tempering Seeds in Oil.md",
-    "unknown.jpg",
     "Index.md",
     "Techniques/Blooming Spices.md",
     "Recipes/Index.md",
@@ -225,7 +224,6 @@
     "Chefs.md",
     "Recipes/Baked Tofu and Crispy Rice Salad.md",
     "Recipes/Quick Edamame and Dumplings.md",
-    "Recipes/Miso Soup Freezer Balls.md",
     "Recipes/Cheatcode Korean Chicken.md",
     "Recipes/Cabbage Thoran.md",
     "Chefs/Janis.md",
