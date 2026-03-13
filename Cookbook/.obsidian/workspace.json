@@ -4,26 +4,6 @@
     "type": "split",
     "children": [
       {
-        "id": "2f9b207a20e6b0c2",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "81f32975a7c745d9",
-            "type": "leaf",
-            "state": {
-              "type": "split-diff-view",
-              "state": {
-                "aFile": "Cookbook/.obsidian/workspace.json",
-                "bFile": "Cookbook/.obsidian/workspace.json",
-                "aRef": ""
-              },
-              "icon": "diff",
-              "title": "Diff: workspace.json  (Working Tree)"
-            }
-          }
-        ]
-      },
-      {
         "id": "f08d495661e2192a",
         "type": "tabs",
         "children": [
@@ -31,10 +11,15 @@
             "id": "7a20e4fa5a2d12ae",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "type": "markdown",
+              "state": {
+                "file": "Index.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "Index"
             }
           }
         ]
@@ -210,9 +195,34 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "81f32975a7c745d9",
+  "active": "7a20e4fa5a2d12ae",
   "lastOpenFiles": [
+    "Recipes/Baked Tofu and Crispy Rice Salad.md",
+    "Chefs.md",
+    "Recipes/Cabbage Thoran.md",
+    "Recipes/Cheatcode Korean Chicken.md",
+    "Chefs/Janis.md",
+    "Chefs/Satwik.md",
+    "Chefs/Sid.md",
+    "Chefs/Sunny Bhaiya.md",
+    "Chefs/Yankele.md",
+    "Honorable Mentions and Ideas.md",
+    "Chefs",
+    "Techniques/Tempering Seeds in Oil.md",
+    "Techniques/Soft-Boiling Eggs.md",
+    "Techniques/Garlic and Ginger Paste Base.md",
+    "Techniques/Blooming Spices.md",
+    "Techniques/Batch Freezer Prep.md",
+    "Recipes/Quick Edamame and Dumplings.md",
+    "Recipes/Feta Butter Beans.md",
+    "Recipes/Mayak Eggs.md",
+    "Recipes/Miso Soup Freezer Balls.md",
+    "Recipes/Overnight Oats Formula.md",
+    "Index.md",
+    "Techniques/Pressing and Grating Tofu.md",
+    "Techniques",
     "Welcome.md",
+    "Recipes",
     "README.md"
   ]
 }
