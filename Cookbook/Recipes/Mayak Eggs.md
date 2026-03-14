@@ -23,6 +23,8 @@ chef: "[[Chefs|Janis]]"
 - 1 tsp white vinegar *(for boiling)*
 - 2–4 tbsp white or red onion, finely chopped *(less than half an onion)*
 - Garlic paste
+- Soy sause
+- Mirin
 - Sesame paste (tahini)
 - Chili oil
 - Dried red chilies

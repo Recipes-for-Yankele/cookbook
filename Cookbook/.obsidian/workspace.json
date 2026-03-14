@@ -13,13 +13,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Techniques/Blooming Spices.md",
+                "file": "Recipes/Mayak Eggs.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "Blooming Spices"
+              "title": "Mayak Eggs"
             }
           }
         ]
@@ -179,9 +179,11 @@
             "type": "leaf",
             "state": {
               "type": "file-properties",
-              "state": {},
+              "state": {
+                "file": "Techniques/Blooming Spices.md"
+              },
               "icon": "lucide-info",
-              "title": "File properties"
+              "title": "File properties for Blooming Spices"
             }
           }
         ],
@@ -205,6 +207,7 @@
   },
   "active": "7a20e4fa5a2d12ae",
   "lastOpenFiles": [
+    "Techniques/Blooming Spices.md",
     "Recipes/Feta Butter Beans.md",
     "Recipes/Quick Edamame and Dumplings.md",
     "Recipes/Miso Soup Freezer Balls.md",
@@ -219,7 +222,6 @@
     "unknown.jpg",
     "Techniques/Batch Freezer Prep.md",
     "Techniques/Tempering Seeds in Oil.md",
-    "Techniques/Blooming Spices.md",
     "Techniques/Index.md",
     "Techniques/Pressing and Grating Tofu.md",
     "Techniques/Soft-Boiling Eggs.md",
