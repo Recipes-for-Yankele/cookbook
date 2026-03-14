@@ -11,14 +11,15 @@
             "id": "7a20e4fa5a2d12ae",
             "type": "leaf",
             "state": {
-              "type": "split-diff-view",
+              "type": "markdown",
               "state": {
-                "aFile": "Cookbook/.obsidian/community-plugins.json",
-                "bFile": "Cookbook/.obsidian/community-plugins.json",
-                "aRef": ""
+                "file": "Techniques/Blooming Spices.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
               },
-              "icon": "diff",
-              "title": "Diff: community-plugins.json  (Working Tree)"
+              "icon": "lucide-file",
+              "title": "Blooming Spices"
             }
           }
         ]
@@ -199,8 +200,7 @@
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
       "bases:Create new base": false,
-      "obsidian-git:Open Git source control": false,
-      "custom-image-auto-uploader:Custom Image Auto Uploader": false
+      "obsidian-git:Open Git source control": false
     }
   },
   "active": "7a20e4fa5a2d12ae",
